@@ -1,0 +1,109 @@
+PRIMO:
+#include <stdio.h>
+#include <stdbool.h>
+
+bool ehPrimo(int num) {
+    if (num <= 1) {
+        return false;
+    }
+    
+    for (int i = 2; i <= num / 2; i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+int primo(int n, int *p1, int *p2) {
+    int maiorPrimoMenorN = 0;
+    int menorPrimoMaiorN = 0;
+    
+    for (int i = n - 1; i > 1; i--) {
+        if (ehPrimo(i)) {
+            maiorPrimoMenorN = i;
+            break;
+        }
+    }
+    
+    for (int i = n + 1;; i++) {
+        if (ehPrimo(i)) {
+            menorPrimoMaiorN = i;
+            break;
+        }
+    }
+    
+    *p1 = maiorPrimoMenorN;
+    *p2 = menorPrimoMaiorN;
+    
+    return 0;
+}
+
+int main() {
+    int n = 30;
+    int p1, p2;
+    
+    primo(n, &p1, &p2);
+    
+    printf("Maior primo menor que %d: %d\n", n, p1);
+    printf("Menor primo maior que %d: %d\n", n, p2);
+    
+    return 0;
+}
+
+MEDIA:
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+double media(double vet[], int n, int *i) {
+    double soma = 0;
+    double media = 0;
+    double diff = INFINITY;
+    
+    for (int j = 0; j < n; j++) {
+        soma += vet[j];
+    }
+    
+    media = soma / n;
+    
+    for (int j = 0; j < n; j++) {
+        if (fabs(vet[j] - media) < diff) {
+            diff = fabs(vet[j] - media);
+            *i = j;
+        }
+    }
+    
+    return media;
+}
+
+int main() {
+    double vet[] = {10.5, 20.3, 15.2, 18.6, 22.1};
+    int n = sizeof(vet) / sizeof(vet[0]);
+    int i;
+    
+    double avg = media(vet, n, &i);
+    
+    printf("Média: %.2lf\n", avg);
+    printf("Posição do elemento mais próximo da média: %d\n", i);
+    
+    return 0;
+}
+
+FREQUENCIA:
+#include <stdio.h>
+#include <stdbool.h>
+
+void frequencias(int v[], int n, int *f1, int *f2) {
+    int ocorrencias[100] = {0}; // Assumindo que o maior elemento do vetor é 100
+    int menorFrequencia = n;
+    int maiorFrequencia = 0;
+    
+    for (int i = 0; i < n; i++) {
+        ocorrencias[v[i]]++;
+    }
+    
+    for (int i = 0; i < 100; i++) {
+        if (ocorrencias[i] <
+
